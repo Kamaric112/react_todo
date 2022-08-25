@@ -2,17 +2,17 @@ import React , { useState} from 'react'
 import "./App.css"
 
 export default function App() {
-  const [tasks, setTasks] = useState([
+  const [tasks, setTasks] = useState([ //task array of objects
     { id:"task_1", title: "Test 1", status: 0},
     { id:"task_2", title: "Test 2", status: 1}
   ])
 
-const [showIncomplete, setShowIncomplete] = useState(false)
+const [showIncomplete, setShowIncomplete] = useState(false) //incomplete button
 
-const [newTask, setNewTask] = useState("")
+const [newTask, setNewTask] = useState("") //insert new tasks
 
 
-const handleSubmit = (e) => {
+const handleSubmit = (e) => { // if there is new task, add that task to existing tasks array 
   e.preventDefault()
   if (newTask)  {
     const task = {
@@ -25,7 +25,7 @@ const handleSubmit = (e) => {
   }
 }
 
-const handleInputChange =(e) => {
+const handleInputChange =(e) => { // insert task as input value (setNewTask state as input value)
   setNewTask(e.target.value)
 }
 
@@ -48,8 +48,8 @@ const removeTask = (taskId) => {
         <span>Get one item done at a time</span>
     </h1>
     <ul className="task-list">
-      {tasks.filter(task => showIncomplete ? task.status !== 1 : true).map((task) => (
-        <li className={task.status ?"done" : ""} key={task.id}>
+      {tasks.filter(task => showIncomplete ? task.status !== 1 : true).map((task) => ( // if showIncomplete is true, only show tasks not completed, else show all tasks
+        <li className={task.status ?"done" : ""} key={task.id}> 
             <span className="label">{task.title}</span>
             <div className="actions">
                 <input type="checkbox" className="btn-action btn-action-done"  checked={Boolean(task.status)} onChange={(e) => setTaskStatus(task.id, e.target.checked)}/> 
